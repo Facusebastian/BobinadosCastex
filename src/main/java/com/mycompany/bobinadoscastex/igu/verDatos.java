@@ -4,6 +4,8 @@ package com.mycompany.bobinadoscastex.igu;
 import com.mycompany.bobinadoscastex.logica.Controladora;
 import com.mycompany.bobinadoscastex.logica.Motor;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -80,6 +82,11 @@ public class verDatos extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pc\\Downloads\\seo-social-web-network-internet_262_icon-icons.com_61518.png")); // NOI18N
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pc\\Downloads\\pencil-striped-symbol-for-interface-edit-buttons_icon-icons.com_56782.png")); // NOI18N
         jButton2.setText("Editar");
@@ -133,6 +140,50 @@ public class verDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       // controlo que la tabla no este vacia 
+       if(tablaMotor.getRowCount()> 0){
+          //controlo que haya seleccionado uno que quiera elimina
+          //le pongo menos uno porque empezamos en 0 osea 0 es uno y -1 no existe 
+          if(tablaMotor.getSelectedRow() != -1){
+              //recueramos el id que seleccione en la tabla 
+              //ponemos colum 0 porque ahi tenemos el id
+              int num_id = Integer.parseInt(String.valueOf(tablaMotor.getValueAt(tablaMotor.getSelectedRow(), 0)));
+             //mandamos el msj qie salio todo ok :)
+             
+              control.eliminarMotor(num_id);
+              mensaje(" Eliminado exitosamente ","Eliminado Correctamente","info");
+              //volvemos a cargar la tabla porque si no no sale los cambios echos
+              cargarTabla();
+             
+          }
+                       else{
+                mensaje("NO Seleccionaste nada ", "error", "Error al eliminar");
+            }
+           
+           
+       }else{
+            mensaje("No ahi ningun tipo de Motor", "error", "Error al eliminar");
+        }
+               
+               
+               
+               
+    }//GEN-LAST:event_jButton1ActionPerformed
+private void mensaje(String mensaje, String titulo, String tipo){
+         JOptionPane optionPane = new JOptionPane(mensaje);
+         if(tipo.equals("info")){
+             optionPane.setMessage(JOptionPane.INFORMATION_MESSAGE);
+         }
+         else if(tipo.equals("error")){
+             optionPane.setMessage(JOptionPane.ERROR_MESSAGE);
+         }
+             JDialog dialog = optionPane.createDialog(titulo);
+            dialog.setAlwaysOnTop(true);
+                    dialog.setVisible(true);
+        
+        
+    }
   
     
 
@@ -155,7 +206,7 @@ public class verDatos extends javax.swing.JFrame {
            public boolean isCellEditable(int row, int colum){
            return false;
        }};
-       String titulos[] = {"nombreCliente", "telCliente", "marca","RPM","paso","vueltas", "alambre"
+       String titulos[] = {"ID","nombreCliente", "telCliente", "marca","RPM","paso","vueltas", "alambre"
        , "voltaje"};
        
         //Le decimos que use de titulos que es un array todos los titulos que tegna y lo use como Columnas
@@ -168,7 +219,7 @@ public class verDatos extends javax.swing.JFrame {
            //uso el foreach para agregar los datos dinamicamente 
            for(Motor mot: motores){
                //usamos Object porque abarca todo en javaosea estos son los datos recuperados
-           Object colum[]= {mot.getCliente().getNombreCompleto(),mot.getCliente().getNumCliente(),mot.getMarcaMotor(),
+           Object colum[]= {mot.getIdMotor(),mot.getCliente().getNombreCompleto(),mot.getCliente().getNumCliente(),mot.getMarcaMotor(),
             mot.getRpm(), mot.getPaso(), mot.getVueltas(),mot.getAlambre(),mot.getVoltaje()};
            //agregamos con la siguiente funcion las columnas
            modeloTabla.addRow(colum);

@@ -276,7 +276,8 @@ public class CargaMotor extends javax.swing.JFrame {
         String telCliente = txtTelCliente.getText();
         
         control.guardar( marcaMotor, volt, nombreCliente,telCliente,  rpm, vueltas, paso, alambre);
-
+        
+        this.dispose();
 
 
     }//GEN-LAST:event_btnGuardarActionPerformed

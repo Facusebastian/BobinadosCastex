@@ -43,5 +43,9 @@ dialog.setVisible(true);
     public List<Motor> traerMotores() {
    return  control.traerMotores();
     }
+
+    public void eliminarMotor(int num_id) {
+        this.control.eliminarMotor(num_id);
+    }
     
 }

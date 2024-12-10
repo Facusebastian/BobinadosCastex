@@ -11,6 +11,7 @@ com\mycompany\bobinadoscastex\igu\Principal$2.class
 com\mycompany\bobinadoscastex\igu\Principal.class
 com\mycompany\bobinadoscastex\exceptions\PreexistingEntityException.class
 com\mycompany\bobinadoscastex\exceptions\IllegalOrphanException.class
+com\mycompany\bobinadoscastex\igu\verDatos$2.class
 com\mycompany\bobinadoscastex\logica\Motor.class
 com\mycompany\bobinadoscastex\igu\CargaMotor$3.class
 com\mycompany\bobinadoscastex\persistencia\ClienteJpaController.class
