@@ -6,6 +6,7 @@ import com.mycompany.bobinadoscastex.persistencia.exceptions.NonexistentEntityEx
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.metamodel.SingularAttribute;
 
 public class controladoraPersistencia {
 ClienteJpaController clientePersis = new ClienteJpaController();
@@ -32,6 +33,35 @@ MotorJpaController motorPersis = new MotorJpaController();
         
     }
     }
+
+   
+
+    public Motor traerMotor(int num_id) {
+        return this.motorPersis.findMotor(num_id);
+    }
+
+    public void modificarMotor(Motor motor) {
+    try {
+    // con mi metodo edit que me dio jpa edito el de la base de datos
+        motorPersis.edit(motor);
+    } catch (Exception ex) {
+    }
+    }
+
+    public Cliente buscarCliente(int idCliente) {
+        return this.clientePersis.findCliente(idCliente);
+    }
+
+    public void modificarCliente(Cliente cliente) {
+    try {
+        this.clientePersis.edit(cliente);
+    } catch (Exception ex) {
+    }
+ }
+    
+
+  
+ 
 
    
         

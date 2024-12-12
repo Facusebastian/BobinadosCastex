@@ -36,8 +36,8 @@ public class verDatos extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaMotor = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
+        Editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,16 +80,21 @@ public class verDatos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pc\\Downloads\\seo-social-web-network-internet_262_icon-icons.com_61518.png")); // NOI18N
-        jButton1.setText("Eliminar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Eliminar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pc\\Downloads\\seo-social-web-network-internet_262_icon-icons.com_61518.png")); // NOI18N
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                EliminarActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pc\\Downloads\\pencil-striped-symbol-for-interface-edit-buttons_icon-icons.com_56782.png")); // NOI18N
-        jButton2.setText("Editar");
+        Editar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Pc\\Downloads\\pencil-striped-symbol-for-interface-edit-buttons_icon-icons.com_56782.png")); // NOI18N
+        Editar.setText("Editar");
+        Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,8 +109,8 @@ public class verDatos extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Editar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -120,9 +125,9 @@ public class verDatos extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(67, 67, 67)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -140,7 +145,7 @@ public class verDatos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
        // controlo que la tabla no este vacia 
        if(tablaMotor.getRowCount()> 0){
           //controlo que haya seleccionado uno que quiera elimina
@@ -169,7 +174,37 @@ public class verDatos extends javax.swing.JFrame {
                
                
                
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
+          // controlo que la tabla no este vacia 
+       if(tablaMotor.getRowCount()> 0){
+          //controlo que haya seleccionado uno que quiera editar
+          //le pongo menos uno porque empezamos en 0 osea 0 es uno y -1 no existe 
+          if(tablaMotor.getSelectedRow() != -1){
+              //recueramos el id que seleccione en la tabla 
+              //ponemos colum 0 porque ahi tenemos el id
+              int num_id = Integer.parseInt(String.valueOf(tablaMotor.getValueAt(tablaMotor.getSelectedRow(), 0)));
+             ModificarDato modificarDato = new ModificarDato(num_id);
+             modificarDato.setVisible(true);
+             modificarDato.setLocationRelativeTo(null);
+             this.dispose();
+             
+             
+             
+              //volvemos a cargar la tabla porque si no no sale los cambios echos
+              cargarTabla();
+             
+          }
+                       else{
+                mensaje("NO Seleccionaste nada ", "error", "Error al eliminar");
+            }
+           
+           
+       }else{
+            mensaje("No ahi ningun tipo de Motor", "error", "Error al eliminar");
+        }
+    }//GEN-LAST:event_EditarActionPerformed
 private void mensaje(String mensaje, String titulo, String tipo){
          JOptionPane optionPane = new JOptionPane(mensaje);
          if(tipo.equals("info")){
@@ -188,8 +223,8 @@ private void mensaje(String mensaje, String titulo, String tipo){
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Editar;
+    private javax.swing.JButton Eliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
